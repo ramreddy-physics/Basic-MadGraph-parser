@@ -6,9 +6,6 @@ with open("unweighted_events.lhe", "r") as f:
 global events
 
 events = []
-
-cnt = 0
-
 m = 0
 
 for i, line in enumerate(search):
@@ -28,9 +25,8 @@ for i, line in enumerate(search):
         j += 1
       cnt = cnt + 1
 
-
 import numpy as np
-import random
+
 
 #Basic Lorentz invariant variables
 def Get4mom(a): return np.array([a[9],a[6],a[7],a[8]])
@@ -48,16 +44,13 @@ for i in range(N):
 
 phasespace = []
 for i in range(len(events)):
+  temp = []
   for j in range(len(events[i])):
     if events[i][j][0] == particles[0]:
-      temp1 = events[i][j]
-    elif events[i][j][0] == 15.0:
-      temp2 = events[i][j]
-    elif events[i][j][0] == 5000001.0:
-      temp3 = events[i][j]
-    elif events[i][j][0] == -5000001.0:
-      temp4 = events[i][j]
-  phasespace.append([temp1, temp2, temp3, temp4])
+      temp.append(events[i][j])
+    
+  phasespace.append(temp)
+
 momenta = []
 for i in range(len(phasespace)):
   momenta.append([Get4mom(phasespace[i][0]), Get4mom(phasespace[i][1]), Get4mom(phasespace[i][2]), Get4mom(phasespace[i][3])])
